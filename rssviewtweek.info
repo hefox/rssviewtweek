@@ -1,0 +1,4 @@
+name = Rss view tweek
+description = rss view that can be quickly tweeked content types/pages from an admin page
+core = 6.x
+depedencies[] = views

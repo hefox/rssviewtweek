@@ -1,0 +1,34 @@
+<?php
+
+function rssviewtweek_views_api() {
+  return array(
+    'api' => 2,
+    'path' => drupal_get_path('module', 'rssviewtweek'),
+  );
+}
+
+
+
+function rssviewtweek_form_system_rss_feeds_settings_alter(&$form,$form_state){
+  $form['rssviewtweek'] = array(
+    '#type'=>'fieldset',
+    '#collapsible'=>true,
+    '#collapsed'=> true,
+    '#title'=> 'Rss tweeks',
+    '#weight' => -1,
+    '#description' =>t("Remember to flush the cache after settings changes. Override rss view and these settings will be ignored."),
+    'rssviewtweek_types' => array(
+      '#title'=> t('Content types'),
+      '#type' => 'select',
+      '#multiple' => true,
+      '#default_value' => variable_get('rssviewtweek_types', array(
+        'tcpr_article' => 'tcpr_article',
+        'tcpr_financialdisclosure' => 'tcpr_financialdisclosure',
+        'tcpr_medfactsheet' => 'tcpr_medfactsheet',
+        'tcpr_researchupdate' => 'tcpr_researchupdate',
+      )), 
+      '#options'=> array_map('check_plain', node_get_types('names')),
+    ),
+  );
+
+}
